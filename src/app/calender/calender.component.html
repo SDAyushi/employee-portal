@@ -1,0 +1,80 @@
+<!-- Calendar Trigger (Input Field) -->
+<div class="custom-calender">
+    <div class="col-md-12">
+      <div class="input-group">
+        <!-- Calendar Icon -->
+        <span class="input-group-text">
+          <img src="assets/images/CalendarIcon.svg" alt="User Icon" style="width: 20px; height: 20px;">
+        </span>
+        <input matInput [matMenuTriggerFor]="picker" placeholder="Select a date" readonly [(ngModel)]="currentMonthDate" class="form-control input-field" />
+      </div>
+    </div>
+  
+    <!-- Calendar Menu (Inside Mat Menu) -->
+    <mat-menu #picker="matMenu" class="calendar-menu">
+      <div class="calendar-container">
+        <!-- Quick Selection Buttons -->
+        <div class="quick-select">
+          <!-- For primary calendar, show full set of quick select options -->
+          <button *ngIf="!isSecondaryCalendar" (click)="selectDate($event,getToday())" [class.selected]="isSelected(getToday())">Today</button>
+          <button *ngIf="!isSecondaryCalendar" (click)="selectDate($event,getNextMonday())" [class.selected]="isSelected(getNextMonday())">Next Monday</button>
+          <button *ngIf="!isSecondaryCalendar" (click)="selectDate($event,getNextTuesday())" [class.selected]="isSelected(getNextTuesday())">Next Tuesday</button>
+          <button *ngIf="!isSecondaryCalendar" (click)="selectDate($event,getAfterOneWeek())">After 1 week</button>
+  
+          <!-- For secondary calendar, show only 'Today' and 'No Date' -->
+          <button *ngIf="isSecondaryCalendar" (click)="noDate($event)" [class.selected]="!selectedDate">No Date</button>
+          <button *ngIf="isSecondaryCalendar" (click)="selectDate($event,getToday())" [class.selected]="isSelected(getToday())" [disabled]="isTodayDisabled()">Today</button>
+        </div>
+  
+        <!-- Calendar Header -->
+        <div class="calendar-header" (click)="calenderGrid($event)">
+          <div (click)="previousMonth($event)" class="calender_arrow">
+            <img src="assets/images/calender_left_arrow.svg" alt="" srcset="">
+          </div>
+          <h2>{{ monthNames[currentMonth] }} {{ currentYear }}</h2>
+          <div (click)="nextMonth($event)" class="calender_arrow">
+            <img src="assets/images/calender_right_arrow.svg" alt="" srcset="">
+          </div>
+        </div>
+  
+        <!-- Calendar Grid -->
+        <div class="calendar-grid" (click)="calenderGrid($event)">
+          <!-- Weekday Headers -->
+          <div class="weekdays">
+            <div class="weekday" *ngFor="let day of weekDays">{{ day }}</div>
+          </div>
+  
+          <!-- Calendar Days -->
+          <div class="weeks">
+
+            <div *ngFor="let week of weeks" class="week">
+                <div *ngFor="let date of week" class="day"
+                     [class.today]="isToday(date)"
+                     [class.selected]="isSelected(date)"
+                     [class.other-month]="!isSameMonth(date)"
+                     [class.disabled]="isDisabled(date)"
+                     (click)="!isDisabled(date) && selectDate($event, date)">
+                  {{ date?.getDate() }}
+                </div>
+              </div>
+              
+          </div>
+        </div>
+  
+        <!-- Selected Date Display -->
+        <div class="selected-date">
+          <div class="date-display" (click)="calenderGrid($event)">
+            <span>
+              <img src="assets/images/CalendarIcon.svg" alt="" srcset="">
+            </span>
+            {{ !selectedDate ? 'No Date' : selectedDate | date: 'd MMM yyyy'}}
+          </div>
+          <div class="actions">
+            <button class="cancel" (click)="cancel()">Cancel</button>
+            <button class="save" (click)="save()">Save</button>
+          </div>
+        </div>
+      </div>
+    </mat-menu>
+  </div>
+  

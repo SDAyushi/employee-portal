@@ -1,0 +1,100 @@
+<section class="add-employee">
+    <app-header [title]="id ? 'Edit Employee Details' :'Add Employee Details'" [isEdit]="id ? true : false" (delete_emp)="deleteEmployee()"></app-header>
+    
+    <div class="form-container">
+      <form #form="ngForm" (ngSubmit)="submit(form)" class="employee-form" novalidate>
+        <div class="form-grid">
+          <!-- Employee Name -->
+          <div class="form-group">
+            <label for="name">Employee Name <span class="text-danger">*</span></label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <img src="assets/images/user.svg" alt="User">
+              </span>
+              <input 
+                type="text" 
+                id="name"
+                name="name"
+                [(ngModel)]="employee.name"
+                #name="ngModel"
+                required
+                minlength="3"
+                placeholder="Enter employee name"
+                [class.error]="name.invalid && (name.dirty || name.touched)">
+            </div>
+            <div class="error-messages" *ngIf="name.invalid && (name.dirty || name.touched)">
+              <span *ngIf="name.errors?.['required']">Please enter employee name</span>
+              <span *ngIf="name.errors?.['minlength']">Name must be at least 3 characters</span>
+            </div>
+          </div>
+  
+          <!-- Role Selection -->
+          <div class="form-group">
+            <label for="type">Employee Designation<span class="text-danger">*</span></label>
+            <div class="input-wrapper">
+              <span class="input-icon">
+                <img src="assets/images/role.svg" alt="Role">
+              </span>
+              <select 
+                id="type"
+                name="type"
+                [(ngModel)]="employee.type"
+                #type="ngModel"
+                required
+                [class.error]="type.invalid && (type.dirty || type.touched)">
+                <option value="" disabled>Select role</option>
+                <option value="Product Designer">Product Designer</option>
+                <option value="Flutter Developer">Flutter Developer</option>
+                <option value="QA Tester">QA Tester</option>
+                <option value="Product Owner">Product Owner</option>
+              </select>
+            </div>
+            <div class="error-messages" *ngIf="type.invalid && (type.dirty || type.touched)">
+              <span *ngIf="type.errors?.['required']">Please select a role</span>
+            </div>
+          </div>
+  
+          <!-- Date Selection -->
+          <div class="date-selection">
+            <div class="calendar-wrapper">
+              <app-calender 
+                [initialDate]="selectedDate"
+                (dateSelected)="handleDateSelected($event)"
+                (onDateSaved)="resetSecondCalendar()">
+              </app-calender>
+            </div>
+  
+            <div class="arrow-wrapper">
+              <img src="assets/images/arrow_right.svg" alt="to" class="arrow-icon">
+            </div>
+  
+            <div class="calendar-wrapper">
+              <app-calender 
+              #secondCalendar
+                [isSecondaryCalendar]="true"
+                [minDate]="selectedDate"
+                [initialDate]="tillselectedDate"
+                (NodateSelected)="handleNoDateSelected($event)">
+              </app-calender>
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+  
+    <!-- Action Buttons -->
+    <footer class="form-actions">
+      <div class="action-buttons">
+        <button type="button" class="btn-cancel" (click)="cancel()">
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          class="btn-save" 
+          [disabled]="form.invalid"
+          (click)="submit(form)">
+          Save
+        </button>
+      </div>
+    </footer>
+  </section>

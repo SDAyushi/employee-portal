@@ -1,0 +1,323 @@
+.input-field{
+  background: white !important;
+}
+.custom-calender {
+    .input-group {
+      position: relative;
+      margin-bottom: 16px;
+  
+      .input-group-text {
+        position: absolute;
+        left: 12px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 2;
+        background: transparent;
+        border: none;
+        padding: 0;
+  
+        img {
+          width: 20px;
+          height: 20px;
+          opacity: 0.7;
+        }
+      }
+  
+      .form-control {
+        padding: 0.75rem 1rem 0.75rem 3rem;
+        border: 1px solid #e2e8f0;
+        border-radius: 8px !important;
+        font-size: 14px;
+        width: 100%;
+        transition: all 0.2s;
+        @media (max-width:767px){
+            padding: 0.75rem 0rem 0.75rem 2.2rem;
+        }
+  
+        &:focus {
+          outline: none;
+          border-color: #1DA1F2;
+          box-shadow: 0 0 0 3px rgba(29, 161, 242, 0.1);
+        }
+  
+        &::placeholder {
+          color: #94a3b8;
+        }
+      }
+    }
+  }
+  
+  .calendar-menu {
+    min-width: 320px !important;
+  }
+  
+  .calendar-container {
+    padding: 16px;
+    background: white;
+    border-radius: 12px;
+  
+    .quick-select {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-bottom: 20px;
+  
+      button {
+        padding: 8px 12px;
+        border: none;
+        background: #EDF8FF;
+        color: #1DA1F2;
+        border-radius: 6px;
+        font-size: 13px;
+        font-weight: 500;
+        cursor: pointer;
+        transition: all 0.2s;
+  
+        &:hover {
+          background: #dbeeff;
+        }
+  
+        &.selected {
+          background: #1DA1F2;
+          color: white;
+        }
+        &.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            background: #f3f4f6 !important;
+            color: #9ca3af !important;
+          }
+      
+          &:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            pointer-events: none;
+          }
+      }
+    }
+  
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+      padding: 0 8px;
+  
+      h2 {
+        margin: 0;
+        font-size: 15px;
+        font-weight: 600;
+        color: #1f2937;
+      }
+  
+      .calender_arrow {
+        cursor: pointer;
+        padding: 8px;
+        border-radius: 4px;
+        transition: background 0.2s;
+  
+        &:hover {
+          background: #f3f4f6;
+        }
+  
+        img {
+          width: 16px;
+          height: 16px;
+        }
+      }
+    }
+  
+    .calendar-grid {
+      .weekdays {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        margin-bottom: 8px;
+  
+        .weekday {
+          text-align: center;
+          font-size: 13px;
+          font-weight: 500;
+          color: #6b7280;
+          padding: 8px 0;
+        }
+      }
+  
+      .weeks {
+        .week {
+          display: grid;
+          grid-template-columns: repeat(7, 1fr);
+        }
+  
+        .day {
+          height: 32px;
+          width: 32px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          margin: 2px auto;
+          cursor: pointer;
+          border-radius: 50%;
+          font-size: 13px;
+          transition: all 0.2s;
+  
+          &:hover:not(.other-month):not(.disabled) {
+            background: #f3f4f6;
+          }
+  
+          &.today {
+            color: #1DA1F2;
+            border: 1.5px solid #1DA1F2;
+            font-weight: 500;
+          }
+  
+          &.selected {
+            background: #1DA1F2;
+            color: white;
+            font-weight: 500;
+          }
+  
+          &.other-month {
+            color: #d1d5db;
+          }
+  
+          &.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+  
+    .selected-date {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid #e5e7eb;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+  
+      .date-display {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        color: #4b5563;
+  
+        span img {
+          width: 16px;
+          height: 16px;
+          opacity: 0.7;
+        }
+      }
+  
+      .actions {
+        display: flex;
+        gap: 8px;
+  
+        button {
+          padding: 6px 16px;
+          border: none;
+          border-radius: 6px;
+          font-size: 13px;
+          font-weight: 500;
+          cursor: pointer;
+          transition: all 0.2s;
+  
+          &.cancel {
+            background: #EDF8FF;
+            color: #1DA1F2;
+  
+            &:hover {
+              background: #dbeeff;
+            }
+          }
+  
+          &.save {
+            background: #1DA1F2;
+            color: white;
+  
+            &:hover {
+              background: #1a91da;
+            }
+          }
+        }
+      }
+    }
+  }
+  
+  // Material Menu Overrides
+  ::ng-deep {
+    .mat-menu-panel {
+      max-width: none !important;
+      border-radius: 12px !important;
+      box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1),
+                  0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
+    }
+  }
+
+  // Add these styles at the bottom of your existing CSS
+
+// Mobile Calendar Positioning
+@media (max-width: 767px) {
+    ::ng-deep {
+      // Override Material Menu positioning
+      .cdk-overlay-container {
+        z-index: 1000;
+      }
+  
+      .cdk-global-overlay-wrapper {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        min-height: 100vh !important;
+      }
+  
+      .cdk-overlay-pane {
+        position: static !important;
+        margin: 16px !important;
+      }
+  
+      .mat-menu-panel.calendar-menu {
+        min-width: calc(100vw - 32px) !important;
+        max-width: 360px !important;
+        margin: auto;
+        position: relative !important;
+        transform: none !important;
+      }
+    }
+  
+    .calendar-container {
+      max-height: calc(100vh - 64px);
+      overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+  
+      // Adjust internal spacing for mobile
+      padding: 12px;
+  
+      .quick-select {
+        button {
+          padding: 10px 12px; // Slightly larger touch targets
+        }
+      }
+  
+      .day {
+        height: 36px; // Slightly larger touch targets
+        width: 36px;
+      }
+  
+      .selected-date {
+        .actions {
+          button {
+            padding: 8px 16px; // Slightly larger touch targets
+          }
+        }
+      }
+    }
+  }
+  
+  // Optional: Add backdrop for better mobile UX
+  ::ng-deep {
+    .cdk-overlay-dark-backdrop {
+      background: rgba(0, 0, 0, 0.5);
+    }
+  }

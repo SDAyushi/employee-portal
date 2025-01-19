@@ -1,0 +1,197 @@
+// employee-list.component.scss
+// Basic layout styles
+.empty-state {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 60vh;
+    text-align: center;
+    
+    img { width: 200px; margin-bottom: 1rem; }
+    h2 { font-weight: normal; }
+  }
+  
+  .section-header {
+    background: #f5f5f5;
+    padding: 1rem 2rem;
+    
+    h3 {
+      color: #1DA1F2;
+      margin: 0;
+      font-size: 1.1rem;
+      font-weight: 600;
+    }
+  }
+  
+  // Employee list styles
+  .employee-item {
+    position: relative;
+    background: white;
+    border-bottom: 1px solid #f0f0f0;
+    
+    .employee-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 2rem;
+      background: white;
+      
+      &:hover { background-color: #f8f9fa; }
+    }
+    
+    .employee-info {
+      flex: 1;
+      
+      .employee-name {
+        margin: 0 0 0.5rem 0;
+        font-size: 1.1rem;
+        color: #333;
+      }
+      
+      .employee-role, .employee-date {
+        color: #949C9E;
+        font-size: 0.95rem;
+        margin-bottom: 0.25rem;
+      }
+    }
+    
+    .employee-actions {
+      display: flex;
+      gap: 0.5rem;
+      
+      .action-btn {
+        background: none;
+        border: none;
+        padding: 0.5rem;
+        cursor: pointer;
+        border-radius: 4px;
+        transition: all 0.2s;
+        display: flex;
+        align-items: center;
+        
+        &.edit {
+          color: #1DA1F2;
+          &:hover { background-color: rgba(29, 161, 242, 0.1); }
+        }
+        
+        &.delete {
+          color: #dc3545;
+          &:hover { background-color: rgba(220, 53, 69, 0.1); }
+        }
+      }
+    }
+  }
+  
+  // Mobile and Tablet styles
+  @media (max-width: 1024px) {
+    .employee-item {
+      overflow: hidden;
+      touch-action: pan-x;
+      
+      .employee-content {
+        transform: translateX(0);
+        transition: transform 0.3s ease;
+        width: 100%;
+      }
+  
+      .delete-action {
+        position: absolute;
+        right: 0;
+        top: 0;
+        height: 100%;
+        width: 80px;
+        display: flex;
+        background-color: #dc3545;
+        transform: translateX(100%);
+        transition: transform 0.3s ease;
+  
+        button {
+          width: 100%;
+          height: 100%;
+          border: none;
+          background: transparent;
+          color: white;
+          cursor: pointer;
+          
+          img {
+            width: 20px;
+            height: 20px;
+            filter: brightness(0) invert(1);
+          }
+        }
+      }
+  
+      &.swiped {
+        .employee-content { transform: translateX(-80px); }
+        .delete-action { transform: translateX(0); }
+      }
+  
+      .employee-actions .action-btn.delete { display: none; }
+    }
+  }
+  
+  // Floating action button
+  .fab-button {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: #1DA1F2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 8px rgba(29, 161, 242, 0.3);
+    z-index: 100;
+    
+    img { width: 24px; height: 24px; }
+    &:hover { transform: scale(1.05); }
+  }
+  
+  // Mobile adjustments
+  @media (max-width: 768px) {
+    .section-header { padding: 1rem; }
+    .employee-item .employee-content { padding: 1rem; }
+    .fab-button {
+      bottom: 1.5rem;
+      right: 1.5rem;
+    }
+  }
+  
+  // Snackbar styles
+  .delete-snackbar.bottom-snackbar {
+    position: fixed;
+    bottom: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    width: 100% !important;
+    margin: 0 !important;
+    background: #323232;
+    
+    .mat-simple-snackbar {
+      justify-content: space-between;
+      padding: 14px 16px;
+      margin: 0 auto;
+      max-width: 600px;
+    }
+  
+    .mat-simple-snackbar-action {
+      color: #29B6F6;
+      font-weight: 500;
+    }
+  }
+  
+  .success-snackbar {
+    background: #43A047 !important;
+    color: white !important;
+    .mat-simple-snackbar-action { color: white !important; }
+  }
+
+  .delete-action {
+    display: none;
+    @media(max-width:1024px){
+     display: flex;
+    }
+  }
