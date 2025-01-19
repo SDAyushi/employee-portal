@@ -32,8 +32,8 @@
           <div class="employee-role">{{ employee.type }}</div>
           <div class="employee-date">
             {{ employee.joinDate | date: 'dd MMM, yyyy' }}
-            <span *ngIf="isJoinDateValid(employee.joinDate)">
-                - {{ employee.joinDate | date: 'dd MMM, yyyy' }}
+            <span *ngIf="employee.tillDate && employee.tillDate <= today">
+                - {{ employee.tillDate | date: 'dd MMM, yyyy' }}
               </span>
           </div>
         </div>
@@ -78,8 +78,8 @@
           <div class="employee-role">{{ employee.type }}</div>
           <div class="employee-date">
             {{ employee.joinDate | date: 'dd MMM, yyyy' }}
-            <span *ngIf="isJoinDateValid(employee.joinDate)">
-                - {{ employee.joinDate | date: 'dd MMM, yyyy' }}
+            <span *ngIf="employee.tillDate && employee.tillDate <= today">
+                - {{ employee.tillDate | date: 'dd MMM, yyyy' }}
               </span>
           </div>
         </div>

@@ -45,10 +45,6 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     window.removeEventListener('resize', () => this.checkScreenSize());
   }
 
-  isJoinDateValid(joinDate: string): boolean {
-    return new Date(joinDate) <= this.today;
-  }
-
   loadEmployees(): void {
     this.employeeService.getAllEmployees().then((data) => {
       this.employees = data;
