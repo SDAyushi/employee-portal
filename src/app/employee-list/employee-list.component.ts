@@ -21,6 +21,7 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   private readonly SWIPE_THRESHOLD = 80;
   private deletedEmployee: Employee | null = null;
   isMobileOrTablet: boolean = false;
+  today = new Date();
 
   constructor(
     private employeeService: EmployeeService, 
@@ -44,6 +45,10 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
     window.removeEventListener('resize', () => this.checkScreenSize());
   }
 
+  isJoinDateValid(joinDate: string): boolean {
+    return new Date(joinDate) <= this.today;
+  }
+
   loadEmployees(): void {
     this.employeeService.getAllEmployees().then((data) => {
       this.employees = data;
@@ -52,10 +57,10 @@ export class EmployeeListComponent implements OnInit, OnDestroy {
   }
 
   categorizeEmployees(): void {
-    this.currentEmployees = this.employees.filter(employee => !employee.tillDate);
+    this.currentEmployees = this.employees.filter(employee => !employee.tillDate || new Date(employee.tillDate) > new Date());
     this.currentEmployees.sort((a, b) => new Date(b.joinDate).getTime() - new Date(a.joinDate).getTime());
   
-    this.previousEmployees = this.employees.filter(employee => employee.tillDate && new Date(employee.tillDate));
+    this.previousEmployees = this.employees.filter(employee => employee.tillDate && new Date(employee.tillDate) <= new Date());
     this.previousEmployees.sort((a, b) => new Date(b.tillDate).getTime() - new Date(a.tillDate).getTime());
   }
 

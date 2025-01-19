@@ -31,8 +31,10 @@
           <h4 class="employee-name">{{ employee.name }}</h4>
           <div class="employee-role">{{ employee.type }}</div>
           <div class="employee-date">
-            {{ employee.joinDate | date: 'dd MMM, yyyy' }} - 
-            {{ !employee.tillDate ? 'Present' : (employee.tillDate | date: 'dd MMM, yyyy') }}
+            {{ employee.joinDate | date: 'dd MMM, yyyy' }}
+            <span *ngIf="isJoinDateValid(employee.joinDate)">
+                - {{ employee.joinDate | date: 'dd MMM, yyyy' }}
+              </span>
           </div>
         </div>
         <div class="employee-actions">
@@ -75,8 +77,10 @@
           <h4 class="employee-name">{{ employee.name }}</h4>
           <div class="employee-role">{{ employee.type }}</div>
           <div class="employee-date">
-            {{ employee.joinDate | date: 'dd MMM, yyyy' }} - 
-            {{ !employee.tillDate ? 'Present' : (employee.tillDate | date: 'dd MMM, yyyy') }}
+            {{ employee.joinDate | date: 'dd MMM, yyyy' }}
+            <span *ngIf="isJoinDateValid(employee.joinDate)">
+                - {{ employee.joinDate | date: 'dd MMM, yyyy' }}
+              </span>
           </div>
         </div>
         <div class="employee-actions">
